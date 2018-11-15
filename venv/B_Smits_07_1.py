@@ -1,8 +1,8 @@
 import random
 
-print("Ievadiet 'end', lai beigtu")
-
-while True:
+i = 0
+correct = 0
+while i < 10:
     choice = random.choice(['+', '-', '*', '/', '**'])
     if choice != '**' and  choice != '/':
         values = [random.randint(1,10),random.randint(1,10)] # values = 2 skaitlu vertibas (sija gadijuma ranzomizetas)
@@ -22,24 +22,13 @@ while True:
     # main program
     userinput=(input((str)(values[0])+" "+choice+" "+(str)(values[1])+" = "))
     try:
-        if   userinput=="end":
-            break
-        elif  (int)(userinput)==result:
+        if  (int)(userinput)==result:
             print("Pareizi")
+            correct +=1
         elif (int)(userinput)!=result:
             print("Nepareizi, pareiza atbilde ir "+(str)(result))
+        i+=1
     except:
-        print("Bad input, only int or (str)'end' is allowed. If you want to end the program enter 'end' ")
+        print("Bad input, only int is allowed ")
 
-
-
-    # #alternativa "primitiva" versija ar if-iem, beigs darbibu tiklidz ko bus slikta ievade
-    #
-    # userinput=(input((str)(values[0])+" "+choice+" "+(str)(values[1])+" = "))
-    # if   (not((userinput.startswith('-') and userinput[1:].isdigit()) or userinput.isdigit())):
-    #     break # ja str sakas ar simbolu '-' un viss neieskaitot pirmo simbolu ('-') ir digit or str ir digit
-    # else:
-    #         if (int)(userinput)==result:
-    #             print("Pareizi")
-    #         else:
-    #             print("Nepareizi")
+print("Pareizo atbilzu skaits: "+(str)(correct))
