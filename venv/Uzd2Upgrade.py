@@ -1,8 +1,8 @@
 import random
 import time
 
-def getRandValue():
-    return[random.randint(1,6),random.randint(1,6)] # buffer for int 1 and 2
+def getRandValue(): # iegust randomizetu vertibu no 1 lidz 6
+    return[random.randint(1,6),random.randint(1,6)]
 def printValue(user,randVal1, randVal2, score): # izprinte ara lietotaja/datora "uzmesto" vertibu un kopejo rezultatu
     return ((user)+(str)(randVal1)+" "+(str)(randVal2)+" | "+(str)(score))
 def gameLogic(val1, val2,currentScore):
@@ -25,32 +25,32 @@ if (not userinput == "moneta") and (not userinput == "gerbonis"): #checks for ba
 else:
     lietotajsVaiDators = ["Lietotajs: ", "Dators   : "] # saraksts ar lietotajiem
     izvele = random.choice(["moneta", "gerbonis"])
-    reversedd = False #parbaude prieks izvades
+    notReversedd = True #parbaude prieks izvades
     if  userinput!=izvele: # ja zaude, uzsak 'dators'
         print("Jus zaudejat, speli uzsak dators")
         lietotajsVaiDators=list(reversed(lietotajsVaiDators)) # speles lietotaja uzsaksanas seciba tiek "mainita"
-        reversedd = True # parbaude prieks izvades
+        notReversedd = False # parbaude prieks izvades (lietotaju seciba [lietotajs, dators] tagad ir [dators,lietotajs]
     else:
         print("Jus uzvarejat, speli uzsaciet jus")
 
-    time.sleep(2)
+    time.sleep(2) # pauze paredzamibai
 
-    scores = [0, 0]  # scores[0]-player/computer, scores[1]-computer/player  # lietotajs uzvar monetas uzminesana/lietotajs zaude
-    gajienuskaits=1
+    scores = [0, 0]  # scores[0]-player/computer, scores[1]-computer/player
+    gajienuskaits = 1 # 1 jo pedejais gajiens netiks ieskatitits (while cikls beigsies uzreiz)
     while True:
         buffer=getRandValue() #iegust randomizetas vertibas
         scores[0]=gameLogic(buffer[0],buffer[1],scores[0]) # speles logika, tiek atgriests attiecigais rezultats
         print(printValue(lietotajsVaiDators[0],buffer[0],buffer[1],scores[0]))
-        buffer.clear()
+        buffer.clear() # nav obligati
         if scores[0]>=100: break
         buffer = getRandValue()
         scores[1] = gameLogic(buffer[0], buffer[1], scores[1])
         print(printValue(lietotajsVaiDators[1], buffer[0], buffer[1], scores[1]))
         if scores[1]>=100: break
-        time.sleep(1)
+        time.sleep(1) # pauze paredzamibai
         gajienuskaits+=1
 
-    if  reversedd==False: # tas ir - lietotaju seciba nav mainijusies (lietotajs 1, dators 2)
+    if  notReversedd==True: # tas ir - lietotaju seciba nav mainijusies (lietotajs 1, dators 2)
         if scores[0]>scores[1]:
             print("Uzvar lietotajs ")
         else:
